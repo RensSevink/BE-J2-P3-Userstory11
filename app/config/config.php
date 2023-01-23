@@ -6,6 +6,6 @@ define('DB_NAME', 'BE-J2-P3');
 
 define('APPROOT', dirname(dirname(__FILE__)));
 
-define('URLROOT', 'http://mvc-oop-pdo-toets-userstory.com');
+define('URLROOT', 'http://be-userstory-11.com/');
 
-define('SITENAME', 'MVC Framework Toets');
+define('SITENAME', 'BE J2 Userstory 11');
