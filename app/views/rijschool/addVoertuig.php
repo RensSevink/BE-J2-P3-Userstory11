@@ -3,12 +3,6 @@
 
 <h3><?= $data['title'] ?></h3>
 
-<h5>Naam: <?= $data['voornaam'] . ' ' . $data['tussenvoegsel'] . ' ' . $data['achternaam'] ?></h5>
-<h5>Datum in dienst: <?= $data['datumindienst'] ?></h5>
-<h5>Aantal sterren: <?= $data['aantalsterren'] ?></h5><br>
-
-<button><a href='/Rijscholen/addVoertuig/<?= $data['instructeurId']; ?>'>Toevoegen voertuig</a></button>
-
 <table border='1'>
   <thead>
     <th>Type voertuig</th>
@@ -17,6 +11,7 @@
     <th>Bouwjaar</th>
     <th>Brandstof</th>
     <th>Rijbewijscategorie</th>
+    <th>Toevoegen</th>
   </thead>
   <tbody>
     <?= $data['rows'] ?>
