@@ -7,7 +7,7 @@
 <h5>Datum in dienst: <?= $data['datumindienst'] ?></h5>
 <h5>Aantal sterren: <?= $data['aantalsterren'] ?></h5><br>
 
-<button><a href='/Rijscholen/addVoertuig/<?= $data['instructeurId']; ?>'>Toevoegen voertuig</a></button><br><br>
+<button><a href='/rijscholen/addVoertuig/<?= $data['instructeurId']; ?>'>Toevoegen voertuig</a></button><br><br>
 
 <table border='1'>
   <thead>

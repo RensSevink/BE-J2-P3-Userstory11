@@ -4,4 +4,4 @@
 <a href="<?= URLROOT; ?>/Lessen/index">Overzicht rijlessen</a><br>
 <a href="<?= URLROOT; ?>/wagenparken/index"> Overzicht Wagenpark</a> <br>
 <a href="<?= URLROOT; ?>/mankementen/index"> Overzicht Mankementen</a> <br>
-<a href="<?= URLROOT; ?>/Rijscholen/index"> Overzicht Instrecteur</a>
+<a href="<?= URLROOT; ?>/rijscholen/index"> Overzicht Instrecteur</a>

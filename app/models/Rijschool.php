@@ -10,13 +10,10 @@ class Rijschool
 
   public function getInstructeurs()
   {
-    try {
+   
       $this->db->query("Select * from Instructeur order by AantalSterren desc");
       $result = $this->db->resultSet();
-      return $result ?? [];
-    } catch (PDOException $ex) {
-      $ex->getMessage();
-    }
+      return $result;
   }
 
   public function getInstructeurById($id)
@@ -45,7 +42,7 @@ class Rijschool
 
   public function getVoertuigById($id)
   {
-    $this->db->query("Select *
+    $this->db->query("Select Voertuig.Id, Voertuig.Kenteken, Voertuig.Bouwjaar, Voertuig.Brandstof, TypeVoertuig.TypeVoertuig, Voertuig.Type, TypeVoertuig.Rijbewijscategorie
                       From Voertuig
                       Inner join TypeVoertuig
                       on Voertuig.TypeVoertuigId = TypeVoertuig.Id
@@ -53,6 +50,14 @@ class Rijschool
 
     $this->db->bind(':id', $id);
     return $this->db->resultSet();
+  }
+
+  public function addVoertuig($data)
+  {
+    $this->db->query("Insert into VoertuigInstructeur (InstructeurId, VoertuigId) values (:InstructeurId, :VoertuigId)");
+    $this->db->bind(':InstructeurId', $data['InstructeurId']);
+    $this->db->bind(':VoertuigId', $data['VoertuigId']);
+    return $this->db->execute();
   }
 
 }

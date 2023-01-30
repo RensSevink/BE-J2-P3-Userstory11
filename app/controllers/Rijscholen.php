@@ -101,4 +101,12 @@ class Rijscholen extends Controller
 
     $this->view('rijschool/addVoertuig', $data);
   }
+
+  public function addVoertuigInstructeur($insId, $voerId)
+  {
+    $this->rijschoolModel->addVoertuigInstructeur($insId, $voerId);
+
+    
+  }
+
 }

@@ -7,4 +7,4 @@
 <a href="<?= URLROOT . '/mankementen' ?>">Overzicht Mankementen</a>
 <br>
 <br>
-<a href="<?= URLROOT . '/Rijscholen/index' ?>">Rijschool</a>
+<a href="<?= URLROOT . '/rijscholen/index' ?>">Rijschool</a>
