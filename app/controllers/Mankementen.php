@@ -3,77 +3,90 @@
 class Mankementen extends Controller
 {
 
-    private $MankementenModel;
+  private $mankementenModel;
 
 
-    public function __construct()
-    {
-        $this->MankementenModel = $this->model('Mankement');
+  public function __construct()
+  {
+    $this->mankementenModel = $this->model('Mankement');
+  }
+
+  public function index()
+  {
+    $result = $this->mankementenModel->getMankement();
+    // if ($result) {
+    //   $instructeurNaam = $result[0]->INNA;
+    // } else {
+    //   $instructeurNaam = '';
+    // }
+    // var_dump($result);
+
+    $rows = '';
+    $first = '';
+
+    foreach ($result as $info) {
+      $rows .= "<tr>
+        <td>$info->Datum</td>
+        <td>$info->Mankement</td>
+      </tr>";
+      $first = "Auto van instructeur: $info->INNA <br>
+      Email: $info->EM <br>
+      Kenteken: $info->AK <br>
+      Type: $info->AT <br>
+      <br>";
     }
 
-    public function index()
-    {
-        $result = $this->MankementenModel->getMankement();
-        // if ($result) {
-        //     $instrecteurNaam = $result[0]->INNA;
-        // } else {
-        //     $instrecteurNaam = '';
-        // }
-        // var_dump($result);
-        $rows = '';
-        $first = '';
-        foreach ($result as $info) {
-            $rows .= "
-            <tr>
-            <td>$info->Datum</td>
-            <td>$info->Mankement</td>
-            </tr>";
-            $first = "  Instructeur: $info->Naam <br>
-                        Email: $info->Email <br>
-                        Kenteken-Type: $info->Kenteken $info->Type
-            ";
+    $data = [
+      'title' => "Overzicht Mankementen",
+      'rows' => $rows,
+      'first' => $first,
+    ];
+    $this->View('mankementen/index', $data);
+  }
+
+  public function addMankementen($instructeurId = 2)
+  {
+    $data = [
+      'title' => 'Invoegen Mankementen',
+      'instructeurId' => $instructeurId,
+      'MankementenErrors' => ''
+    ];
+
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+      $data = [
+        'title' => 'Invoegen Mankementen',
+        'instructeurId' => $instructeurId,
+        'MankementenErrors' => '',
+      ];
+
+      if (!isset($_POST['Mankementen'])) {
+        $data['MankementenErrors'] = "Voer een makement in";
+        $this->view('mankementen/addMankementen', $data);
+        exit;
+      }
+
+      if (strlen($_POST['Mankementen']) > 50) {
+        $data['MankementenErrors'] = "Mankementen mag niet langer zijn dan 50 karakters";
+        $this->view('mankementen/addMankementen', $data);
+        exit;
+      }
+
+      try {
+        $result = $this->mankementenModel->addMankement($_POST);
+        if ($result) {
+          echo "<p>De nieuwe Mankementen is toegevoegd</p>";
+        } else {
+          echo "<p>De nieuwe Mankementen is niet toegevoegd. Probeer het opnieuw</p>";
         }
-
-        $data = [
-            'title' => "Overzicht Mankementen",
-            'rows' => $rows,
-            'first' => $first
-        ];
-        $this->view('mankement/index', $data);
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+      } finally {
+        header('Refresh:5; url=' . URLROOT . '/mankementen');
+      }
     }
-
-
-    public function addMankement($InstrecteurId = 2)
-    {
-        $data = [
-            'title' => 'Invoegen Mankement',
-            'InstrecteurId' => $InstrecteurId,
-            'Errors' => ''
-        ];
-
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // var_dump($_POST);
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-            $data = [
-                'title' => 'Invoegen Mankementen',
-                'InstrecteurId' => 2,
-                'Errors' => '',
-            ];
-
-            if (empty($data['Errors'])) {
-                $result = $this->MankementenModel->addMankement($_POST);
-                if ($result) {
-                    echo "<p>Het nieuwe mankement is toegevoegd</p>";
-                } else {
-                    echo "<p>Het nieuwe mankement is niet toegevoegd, probeer het opnieuw</p>";
-                }
-                header('Refresh:5; url=' . URLROOT . '/mankementen/index/');
-            } else {
-                header('refresh:3; url=' . URLROOT . '/mankement/addMankement/2');
-            }
-        }
-        $this->view('mankement/addMankement', $data);
-    }
+    $this->view('mankementen/addMankementen', $data);
+  }
 }
