@@ -70,7 +70,7 @@ class Rijscholen extends Controller
 
   public function addVoertuig($id) {
     $instructeur = $this->rijschoolModel->getInstructeurById($id);
-    var_dump($instructeur);
+    $voertuig = $this->rijschoolModel->getVoertuigById($id);
 
     $data = [
       'title' => 'Alle beschikbare voertuigen',
