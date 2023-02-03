@@ -10,6 +10,7 @@ class Database
   private $dbPass = DB_PASS;
   private $dbName = DB_NAME;
   private $dbHandler;
+  private $statement;
 
 
   public function __construct()

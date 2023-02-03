@@ -52,11 +52,11 @@ class Rijschool
     return $this->db->resultSet();
   }
 
-  public function addVoertuig($data)
+  public function addVoertuigInstructeur($instructeurId, $voertuigId)
   {
     $this->db->query("Insert into VoertuigInstructeur (InstructeurId, VoertuigId) values (:InstructeurId, :VoertuigId)");
-    $this->db->bind(':InstructeurId', $data['InstructeurId']);
-    $this->db->bind(':VoertuigId', $data['VoertuigId']);
+    $this->db->bind(':InstructeurId', $instructeurId);
+    $this->db->bind(':VoertuigId', $voertuigId);
     return $this->db->execute();
   }
 
