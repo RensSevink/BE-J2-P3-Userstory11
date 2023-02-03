@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Gegenereerd op: 23 jan 2023 om 09:08
+-- Gegenereerd op: 03 feb 2023 om 12:31
 -- Serverversie: 5.7.31
 -- PHP-versie: 8.1.10
 
@@ -123,23 +123,32 @@ CREATE TABLE IF NOT EXISTS `VoertuigInstructeur` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `VoertuigId` int(11) NOT NULL,
   `InstructeurId` int(11) NOT NULL,
-  `DatumToekenning` date NOT NULL,
+  `DatumToekenning` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Id`),
   KEY `Voertuig` (`VoertuigId`),
   KEY `Instructeur` (`InstructeurId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `VoertuigInstructeur`
 --
 
 INSERT INTO `VoertuigInstructeur` (`Id`, `VoertuigId`, `InstructeurId`, `DatumToekenning`) VALUES
-(1, 1, 5, '2017-06-18'),
-(2, 3, 1, '2021-09-26'),
-(3, 9, 1, '2021-09-27'),
-(4, 3, 4, '2022-08-01'),
-(5, 5, 1, '2019-08-30'),
-(6, 10, 5, '2020-02-02');
+(1, 1, 5, '2017-06-17 22:00:00'),
+(2, 3, 1, '2021-09-25 22:00:00'),
+(3, 9, 1, '2021-09-26 22:00:00'),
+(4, 3, 4, '2022-07-31 22:00:00'),
+(5, 5, 1, '2019-08-29 22:00:00'),
+(6, 10, 5, '2020-02-01 23:00:00'),
+(7, 3, 5, '2023-02-03 12:27:50'),
+(8, 4, 5, '2023-02-03 12:27:55'),
+(9, 6, 5, '2023-02-03 12:27:59'),
+(10, 1, 2, '2023-02-03 12:28:42'),
+(11, 3, 2, '2023-02-03 12:28:46'),
+(12, 9, 2, '2023-02-03 12:28:50'),
+(13, 2, 2, '2023-02-03 12:28:54'),
+(14, 8, 2, '2023-02-03 12:29:16'),
+(15, 10, 2, '2023-02-03 12:29:21');
 
 --
 -- Beperkingen voor geëxporteerde tabellen
